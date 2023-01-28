@@ -1,4 +1,5 @@
 import { FC } from "react";
+import Card from "./Card";
 import CostDate from "./CostDate";
 import "./CostItem.css";
 
@@ -15,15 +16,14 @@ export class CostData {
 }
 
 const CostItem: FC<CostData> = (props: CostData) => {
-
   return (
-    <div className="cost-item">
-    <CostDate date={props.date} />
-      <div className="cort-item__description">
+    <Card className="cost-item">
+      <CostDate date={props.date} />
+      <div className="cost-item__description">
         <h2>{props.description}</h2>
         <div className="cost-item__price">${props.amount}</div>
       </div>
-    </div>
+    </Card>
   );
 };
 
