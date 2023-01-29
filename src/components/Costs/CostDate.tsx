@@ -1,11 +1,11 @@
 import { FC } from "react";
 import "./CostDate.css";
 
-export interface CostDate {
+export interface ICostDate {
   date: Date;
 }
 
-const CostDate: FC<CostDate> = (props: CostDate) => {
+const CostDate: FC<ICostDate> = (props: ICostDate) => {
   const year = props.date.getFullYear();
   const month = props.date.toLocaleString("ru-RU", { month: "long" });
   const day = props.date.toLocaleString("ru-RU", { day: "2-digit" });
