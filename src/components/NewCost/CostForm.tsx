@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, SyntheticEvent, useState } from "react";
+import React, { ChangeEvent, FC, useState } from "react";
 import "./CostForm.css";
 
 export interface ICostFormData {

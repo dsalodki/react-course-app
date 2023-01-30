@@ -1,26 +1,36 @@
-import { FC } from 'react';
-import { CostData } from '../Costs/CostItem';
-import CostForm, { ICostFormData } from './CostForm';
-import './NewCost.css';
+import { FC } from "react";
+import { CostData } from "../Costs/CostItem";
+import CostForm, { ICostFormData } from "./CostForm";
+import "./NewCost.css";
 
 export interface INewCostData {
-    onAddCost: (cost: CostData) => void;
+  onAddCost: (cost: CostData) => void;
 }
 
-const NewCost: FC<INewCostData> = ({onAddCost}: INewCostData) => {
-const saveCostDataHandler = (inputCostData: ICostFormData) => {
-    const costData = {
-    ...inputCostData,
-    id: Math.random()
-    }
+const NewCost: FC<INewCostData> = ({ onAddCost }: INewCostData) => {
+  const saveCostDataHandler = (inputCostData: ICostFormData) => {
+    const costData: CostData = new CostData(
+      Math.random(),
+      inputCostData.date,
+      inputCostData.name,
+      inputCostData.amount
+    );
 
-    console.log(costData);
-}
+    // {
+    //   description: inputCostData.name,
+    //   amount: inputCostData.amount,
+    //   date: inputCostData.date,
+    //   id: Math.random(),
+    // };
 
-    return (
-        <div className='new-cost'>
-            <CostForm onSaveCostData={saveCostDataHandler}/>
-        </div>);
+    onAddCost(costData);
+  };
+
+  return (
+    <div className="new-cost">
+      <CostForm onSaveCostData={saveCostDataHandler} />
+    </div>
+  );
 };
 
 export default NewCost;
