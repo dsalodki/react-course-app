@@ -1,7 +1,9 @@
 import { FC, ReactElement, useState } from "react";
 import Card from "../UI/Card";
 import CostItem, { CostData } from "./CostItem";
+import CostList from "./CostList";
 import "./Costs.css";
+import CostsDiagram from "./CostsDiagram";
 import CostsFilter from "./CostsFilter";
 
 export interface ICosts {
@@ -19,24 +21,12 @@ const Costs: FC<ICosts> = (props: ICosts) => {
     return cost.date.getFullYear() == selectedYear;
   });
 
-  let costsContent: ReactElement[] = [<p>В этом году нет расходов</p>];
-  if (filterCosts.length > 0) {
-    costsContent = filterCosts.map((cost: CostData) => (
-      <CostItem
-        key={cost.id}
-        id={cost.id}
-        date={cost.date}
-        description={cost.description}
-        amount={cost.amount}
-      />
-    ));
-  }
-
   return (
     <div>
       <Card className="costs">
         <CostsFilter year={selectedYear} onChangeYear={yearChangeHandler} />
-        {costsContent}
+        <CostsDiagram costs={filterCosts}/>
+        <CostList costs={filterCosts} />
       </Card>
     </div>
   );
