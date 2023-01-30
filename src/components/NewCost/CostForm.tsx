@@ -10,9 +10,10 @@ export interface ICostFormData {
 
 export interface ICostFormProps {
   onSaveCostData: (inputCostData: ICostFormData) => void;
+  onCancel: () => void;
 }
 
-const CostForm: FC<ICostFormProps> = ({ onSaveCostData }: ICostFormProps) => {
+const CostForm: FC<ICostFormProps> = ({ onSaveCostData, onCancel }: ICostFormProps) => {
   const [userInput, setUserInput] = useState<ICostFormData>({
     id: 0,
     name: "",
@@ -93,6 +94,9 @@ const CostForm: FC<ICostFormProps> = ({ onSaveCostData }: ICostFormProps) => {
         </div>
         <div className="new-cost__actions">
           <button type="submit">Добавить Расход</button>
+          <button type="button" onClick={onCancel}>
+            Отмена
+          </button>
         </div>
       </div>
     </form>

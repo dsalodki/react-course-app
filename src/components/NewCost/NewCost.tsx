@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { CostData } from "../Costs/CostItem";
 import CostForm, { ICostFormData } from "./CostForm";
 import "./NewCost.css";
@@ -8,6 +8,9 @@ export interface INewCostData {
 }
 
 const NewCost: FC<INewCostData> = ({ onAddCost }: INewCostData) => {
+
+  const [isFormVisible, setIsFormVisible] = useState<boolean>(false);
+
   const saveCostDataHandler = (inputCostData: ICostFormData) => {
     const costData: CostData = new CostData(
       Math.random(),
@@ -16,19 +19,26 @@ const NewCost: FC<INewCostData> = ({ onAddCost }: INewCostData) => {
       inputCostData.amount
     );
 
-    // {
-    //   description: inputCostData.name,
-    //   amount: inputCostData.amount,
-    //   date: inputCostData.date,
-    //   id: Math.random(),
-    // };
-
     onAddCost(costData);
+    setIsFormVisible(false);
+  };
+
+  const cancelCostHandler = () => {
+    setIsFormVisible(false);
+  }
+
+  const inputCostDataHandler = () => {
+    setIsFormVisible(true);
   };
 
   return (
     <div className="new-cost">
-      <CostForm onSaveCostData={saveCostDataHandler} />
+      {!isFormVisible && (
+        <button onClick={inputCostDataHandler}>Добавить Новый Расход</button>
+      )}
+      {isFormVisible &&
+      <CostForm onSaveCostData={saveCostDataHandler} onCancel={cancelCostHandler}/>
+      }
     </div>
   );
 };
