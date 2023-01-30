@@ -13,7 +13,7 @@ const App:FC = () => {
   const [costs, setCosts] = useState<CostData[]>(INITIAL_COSTS);
 
   const addCostHandler = (cost: CostData) => {
-    setCosts((prevCosts: Array<CostData>) => { return [...prevCosts, cost]});
+    setCosts((prevCosts: CostData[]) => { return [cost, ...prevCosts]});
     // setCosts((prevCosts: CostData[]) => {
     //   prevCosts.unshift(cost);
     //   console.log(prevCosts);
